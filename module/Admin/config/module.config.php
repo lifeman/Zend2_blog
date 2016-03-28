@@ -4,6 +4,8 @@ return array(
         'invokables' => array(
             'Admin\Controller\Index' => 'Admin\Controller\IndexController',
             'category' => 'Admin\Controller\CategoryController',
+            'ddd' => 'Admin\Controller\DddController',
+
         ),
     ),
     'router' => array(
@@ -29,9 +31,19 @@ return array(
                             )
                         )
                     )
-                ),// chield
+                ),// child
             ),
-        )
+            'ddd' => array(
+                'type' => 'literal',
+                'options' => array(
+                    'route' => '/ddd/',
+                    'defaults' => array(
+                        'controller' => 'ddd',
+                        'action' => 'index',
+                    )
+                ),
+            ),
+        ),
     ),
     'view_manager' => array(
         'template_path_stack' => array(
