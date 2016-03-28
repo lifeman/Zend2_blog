@@ -7,5 +7,14 @@
         <th>Название</th>
         <th>Действие</th>
     </tr>
+    <?php foreach ($category as $item) { ?>
+        <tr>
+            <td><?= $item->getId(); ?> </td>
+            <td><?= $item->getCategoryKey(); ?> </td>
+            <td><?= $item->getCategoryName(); ?> </td>
+            <td><a href="<?= $this->url('admin/category', array('action'=>'edit','id'=>$item->getId())); ?>">Редактировать</a>&nbsp;
+            <a href="<?= $this->url('admin/category', array('action'=>'edit','id'=>$item->getId()))?>" onclick="if (confirm('Удалить запись ?')) {document.location=this.href;} else {return false;}">Удалить</a></td>
+        </tr
+    <?php }  ?>
     </tbody>
 </table>

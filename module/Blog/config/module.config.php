@@ -43,7 +43,8 @@ return array(
 
                     )
                 )
-            )
+            ),
+
         )
     ),
     'view_manager' => array(

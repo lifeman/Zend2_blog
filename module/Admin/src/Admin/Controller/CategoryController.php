@@ -11,11 +11,19 @@ namespace Admin\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+//use Application\Controller\BaseAdminController as BaseController;
 
 class CategoryController extends AbstractActionController
 {
     public function indexAction()
     {
-        return new ViewModel();
+        $em=$this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+//        $em->getEntityManager();
+        $query=$em->createQuery('SELECT  u FROM Blog\Entity\Category u ORDER BY  u.id DESC');
+            $rows=$query->getResult();
+//        var_dump($rows);
+//        exit;
+//        return new ViewModel();
+        return array('category'=>$rows);
     }
 }
