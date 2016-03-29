@@ -11,9 +11,9 @@ namespace Admin\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-//use Application\Controller\BaseAdminController as BaseController;
-
-class CategoryController extends AbstractActionController
+use Application\Controller\BaseAdminController as BaseController;
+use Admin\Form\CategoryAddForm;
+class CategoryController extends BaseController
 {
     public function indexAction()
     {
@@ -26,4 +26,40 @@ class CategoryController extends AbstractActionController
 //        return new ViewModel();
         return array('category'=>$rows);
     }
+
+    public function addAction()
+    {
+        $form = new CategoryAddForm;
+        $status=$message='';
+        $em=$this->getEntityManager();
+        $request=$this->getRequest();
+
+        if ($request->isPost()){
+            $form->setData($request->isPost());
+            if ($form->isValid()) {
+
+                $category = new Category();
+                $category->exchangeArray($form->getData());
+
+                $em->persist($category);
+                $em->flush();
+
+                $status = 'success';
+                $message = 'Категория добавлена';
+            } else {
+                $status = 'error';
+                $message = 'Ошибка параметров';
+            }
+        } else {
+            return array('form'=>$form);
+        }
+        if ($message){
+            $this->flashMessager()
+                ->setNamestace($status)
+                ->addMessage($message);
+        }
+
+        return $this->redirect()->toRoute('admin/catrgory');
+    }
 }
+

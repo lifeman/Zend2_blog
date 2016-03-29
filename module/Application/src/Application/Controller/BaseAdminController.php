@@ -1,12 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: lifeman
- * Date: 28.03.16
- * Time: 14:43
- */
 
 namespace Application\Controller;
+use Application\Controller\BaseController;
 
 class BaseAdminController extends BaseController
 {
